@@ -82,7 +82,14 @@
   ],
   "mountLogsVolume": false,
   "loadbalancing": {
-    "rules": []
+    "rules": [
+      {
+        "ingress": "ingress",
+        "path": "/",
+        "portName": "http",
+        "domainPrefix": "killbill"
+      }
+    ]
   }
 }
 }
