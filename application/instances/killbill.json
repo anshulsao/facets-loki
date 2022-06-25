@@ -1,4 +1,10 @@
-{
+{"$schema": "https://docs.facets.cloud/schemas/application/instances/application.schema",
+  "kind": "facets.modules.common.application",
+  "disabled": false,
+  "apiVersion": "v1",
+  "metadata": {
+  },
+  "spec":{
   "size": "SMALL",
   "deploymentStrategy": "Recreate",
   "lbType": "internal",
@@ -75,4 +81,5 @@
     }
   ],
   "mountLogsVolume": false
+}
 }
