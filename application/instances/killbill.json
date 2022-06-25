@@ -1,10 +1,4 @@
-{"$schema": "https://docs.facets.cloud/schemas/application/instances/application.schema",
-  "kind": "facets.modules.common.application",
-  "disabled": false,
-  "apiVersion": "v1",
-  "metadata": {
-  },
-  "spec":{
+{
   "size": "SMALL",
   "deploymentStrategy": "Recreate",
   "lbType": "internal",
@@ -80,16 +74,5 @@
       "storageSize": "5"
     }
   ],
-  "mountLogsVolume": false,
-  "loadbalancing": {
-    "rules": [
-      {
-        "ingress": "ingress",
-        "path": "/",
-        "portName": "http",
-        "domainPrefix": "killbill"
-      }
-    ]
-  }
-}
+  "mountLogsVolume": false
 }
