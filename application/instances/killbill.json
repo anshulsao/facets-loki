@@ -1,69 +1,78 @@
 {
-  "$schema": "https://docs.facets.cloud/schemas/application/instances/application.schema",
-  "kind": "facets.modules.common.application",
-  "disabled": false,
-  "apiVersion": "v2",
-  "metadata": {
+  "size": "SMALL",
+  "deploymentStrategy": "Recreate",
+  "lbType": "internal",
+  "elbIdleTimeoutSeconds": 300,
+  "secretFileMounts": [],
+  "protocolGroup": "tcp",
+  "scaling": {
+    "hpaEnabled": false,
+    "hpaMinReplicas": 1,
+    "hpaMaxReplicas": 1,
+    "hpaMetricThreshold": 60
   },
-  "spec": {
-    "env": {
-      "KILLBILL_DAO_PASSWORD": {
-        "type": "dynamic",
-        "resourceType": "cluster",
-        "resourceName": "secrets",
-        "attribute": "PGSQL_PASSWORD"
-      },
-      "KILLBILL_DAO_URL": {
-        "type": "static",
-        "default": "jdbc:postgresql://killbill-db1-writer:5432/killbill?currentSchema=killbillschema"
-      },
-      "KILLBILL_DAO_USER": {
-        "type": "dynamic",
-        "resourceType": "cluster",
-        "resourceName": "secrets",
-        "attribute": "PGSQL_USER"
-      }
-    },
-    "loadbalancing": {
-      "rules": [
-        {
-          "ingress": "ingress",
-          "path": "/",
-          "portName": "port8080",
-          "domainPrefix": "killbill"
-        }
-      ]
-    },
-    "permission": [
-      {
-        "name": "killbill-permissions",
-        "resourceType": "mysql",
-        "resourceName": "killbill-db",
-        "permission": "READ_WRITE"
-      }
-    ],
-    "release": {
-      "strategy": "RollingUpdate",
-      "build": {
-        "image": "killbill/killbill:0.22.26"
-      }
-    },
-    "runtime": {
-      "size": {
-        "value": "small",
-        "namespace": "GP"
-      },
-      "autoscaling": {
-        "cpuThreshold": "50",
-        "max": 1,
-        "min": 1
-      },
-      "ports": [
-        {
-          "name": "port8080",
-          "port": 8080
-        }
-      ]
+  "liveness": {
+  },
+  "readiness": {
+  },
+  "ports": [
+    {
+      "name": "http",
+      "containerPort": 8080,
+      "lbPort": 80
     }
-  }
+  ],
+  "build": {
+    "ci": "external_image",
+    "external_image": "killbill/killbill:0.22.26"
+  },
+  "credentialRequests": {
+    "dbs": {
+      "mysql" : [
+      ],
+      "mongo" : []
+    },
+    "queues": {
+      "rabbitmq" : []
+    },
+    "cloud": [
+    ]
+  },
+  "environmentVariables": {
+    "static": {
+      "KILLBILL_DAO_URL": "jdbc:postgresql://db:5432/killbill?currentSchema=killbillschema"
+    },
+    "dynamic": {
+        "KILLBILL_DAO_PASSWORD": {
+            "resourceType": "cluster",
+            "resourceName": "secrets",
+            "attribute": "PGSQL_PASSWORD"
+          },
+          "KILLBILL_DAO_USER": {
+            "resourceType": "cluster",
+            "resourceName": "secrets",
+            "attribute": "PGSQL_USER"
+          }
+    }
+  },
+  "k8s_service_names" : ["killbill"],
+
+  "ingress_rules" : [
+    {
+      "ingress": "ingress",
+      "path": "/",
+      "targetPort": 8080,
+      "domainPrefix": "killbill"
+    }
+  ],
+  "resourceAllocationStrategy": "CPU_INTENSIVE",
+  "persistentVolumeClaims" : [
+    {
+      "name": "plugins",
+      "mountPath": "/var/lib/killbill/bundles/plugins/java",
+      "accessMode": "ReadWriteOnce",
+      "storageSize": "5"
+    }
+  ],
+  "mountLogsVolume": false
 }
