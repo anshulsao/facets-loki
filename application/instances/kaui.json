@@ -25,7 +25,7 @@
       },
       "KAUI_KILLBILL_URL": {
           "type": "static",
-          "default": "http://killbill1:8080"
+          "default": "http://killbill-2:8080"
       },
       "KAUI_CONFIG_DAO_ADAPTER": {
         "type": "static",
