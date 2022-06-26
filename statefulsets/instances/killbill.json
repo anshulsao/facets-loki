@@ -40,7 +40,7 @@
   },
   "environmentVariables": {
     "static": {
-      "KILLBILL_DAO_URL": "jdbc:postgresql://db:5432/killbill?currentSchema=killbillschema"
+      "KILLBILL_DAO_URL": "jdbc:postgresql://killbill-db1-writer:5432/killbill?currentSchema=killbillschema"
     },
     "dynamic": {
         "KILLBILL_DAO_PASSWORD": {
