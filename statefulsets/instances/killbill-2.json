@@ -19,7 +19,7 @@
     {
       "name": "http",
       "containerPort": 8080,
-      "lbPort": 80
+      "lbPort": 8080
     }
   ],
   "build": {
