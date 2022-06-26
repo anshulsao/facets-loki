@@ -55,14 +55,14 @@
           }
     }
   },
-  "k8s_service_names" : ["killbill"],
+  "k8s_service_names" : ["killbill1"],
 
   "ingress_rules" : [
     {
       "ingress": "ingress",
       "path": "/",
       "targetPort": 8080,
-      "domainPrefix": "killbill"
+      "domainPrefix": "killbill1"
     }
   ],
   "resourceAllocationStrategy": "CPU_INTENSIVE",
