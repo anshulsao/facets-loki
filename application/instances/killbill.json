@@ -36,25 +36,11 @@
     },
     "permission": [
       {
-        "name": "killbill-permissions",
-        "resourceType": "postgres",
-        "resourceName": "killbill-db",
-        "permission": "READ_WRITE_CREATE",
-        "additional_options": {
-          "databases": {
-            "test": {
-              "schema": ["public"]
-            }
-          }
-        }
-      },
-
-        {
           "name": "killbill-permissions",
           "resourceType": "mysql",
           "resourceName": "killbill-db",
           "permission": "READ_WRITE"
-        }
+      }
 
     ],
     "release": {
