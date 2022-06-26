@@ -19,16 +19,17 @@
     {
       "name": "http",
       "containerPort": 8080,
-      "lbPort": 80
+      "lbPort": 8080
     }
   ],
   "build": {
-    "ci": "external_image",
+    "ci": "killbill/killbill:0.22.26",
     "external_image": "killbill/killbill:0.22.26"
   },
   "credentialRequests": {
     "dbs": {
       "mysql" : [
+        
       ],
       "mongo" : []
     },
