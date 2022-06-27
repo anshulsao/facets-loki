@@ -25,7 +25,7 @@
       },
       "KAUI_KILLBILL_URL": {
           "type": "static",
-          "default": "http://killbill-2.default.svc.cluster.local"
+          "default": "http://killbill-3.default.svc.cluster.local"
       },
       "KAUI_CONFIG_DAO_ADAPTER": {
         "type": "static",
